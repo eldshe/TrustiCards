@@ -1,0 +1,249 @@
+@import "./cards.scss";
+
+.cards-wrapper {
+    height: 65%;
+    margin: 0;
+    width: 90%;
+    padding: 0;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row;
+    transition: transform 0.3s, padding 0.3s;
+    z-index: 200;
+    justify-content: unset;
+}
+
+.semi-wrapper {
+    transition: transform 0.3s;
+}
+
+$--background: #e5ffb3;
+$--background-accent: #dbf8a3;
+$--background-accent-2: #bde66e;
+$--light: #34de97;
+$--dark: #b9d634;
+$--text: black;
+
+@keyframes bgChange {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 400vw 100vw;
+    }
+}
+
+.title {
+    color: white;
+    z-index: 200;
+    font-size: calc(14px + 1vw);
+    transition: margin 0.3s;
+    &:not(.lowered) {
+        margin-top: 0;
+    }
+    margin-top: 6vh;
+}
+
+.start-btn {
+    opacity: 0;
+    visibility: hidden;
+    transition: opcaity 0.6s;
+    width: calc(70px + 9vw);
+    min-height: calc(23px + 1.5vw);
+    background-color: #ffd11a;
+    border: solid 2px black;
+    border-radius: calc(30px + 2vw);
+    font-size: 1.2rem;
+    margin: -15px 0 0 0;
+    font-weight: bold;
+    transition: transform 0.15s;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0 0 5px black;
+    &:hover {
+        border-color: white;
+        box-shadow: none;
+        transform: scale(1.05);
+    }
+    &:not(.hide) {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.start-btn:hover {
+    background-image: linear-gradient(
+        145deg,
+        transparent 10%,
+        $--dark 10% 20%,
+        transparent 20% 30%,
+        $--dark 30% 40%,
+        transparent 40% 50%,
+        $--dark 50% 60%,
+        transparent 60% 70%,
+        $--dark 70% 80%,
+        transparent 80% 90%,
+        $--dark 90% 100%
+    );
+    color: lightslategrey;
+    animation: bgChange 33s linear infinite;
+}
+
+.shader {
+    &:not(.show) {
+        opacity: 0;
+        z-index: -1;
+    }
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 101vh;
+    width: 101vw;
+    transition: opacity 0.3s;
+    opacity: 1;
+    z-index: 100;
+}
+
+.strongShow {
+    background: rgba(0, 0, 0, 0.8) !important;
+    opacity: 1 !important;
+    z-index: 400 !important;
+}
+
+$logo-width: calc(50px + 5.5vw);
+.logo {
+    width: $logo-width;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 20px;
+    transition: margin 0.3s;
+}
+
+$points-width: calc(50px + 3.5vw);
+.pointsView {
+    width: $points-width;
+    height: calc(#{$points-width}* 1.05);
+    background: white;
+    border-radius: 20px;
+    position: absolute;
+    margin: 20px;
+    right: 0;
+    top: 0;
+    overflow: hidden;
+    transition: margin 0.3s;
+    border: solid 2px midnightblue;
+
+    > * {
+        height: calc(100% / 3);
+        display: flex;
+        > * {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 50%;
+            height: 100%;
+            text-align: center;
+            overflow: auto;
+            border: solid 1px grey;
+        }
+    }
+    .w :first-child {
+        background: rgb(117, 255, 117);
+    }
+    .l :first-child {
+        background: rgb(255, 117, 117);
+    }
+}
+
+.statistics {
+    position: absolute;
+    margin: 20px;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+
+    > * {
+        display: flex;
+        flex-direction: row;
+        > * {
+            margin: 5px;
+        }
+    }
+}
+
+$pointCard-width: calc(23px + 2vw);
+.pointCard {
+    width: $pointCard-width;
+    height: calc(#{$pointCard-width}* 1.2);
+    border: solid 1px grey;
+    box-shadow: 0 0 2px black;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    font-size: calc(10px + 0.8vw);
+    text-align: center;
+    font-weight: bold;
+}
+.pointCard::before {
+    content: "";
+    background: transparent;
+    border: solid 1px white;
+    border-radius: 5%;
+    width: 80%;
+    height: 90%;
+    margin: auto;
+}
+.loses {
+    background: rgb(255, 189, 189);
+    span {
+        position: absolute;
+        width: $pointCard-width;        
+    }
+}
+.wins {
+    background: lightgreen;
+    span {
+        position: absolute;
+        width: $pointCard-width;        
+    }
+}
+.points {
+    background: white;
+    border-radius: 5px;
+    height: auto;
+    width: 88%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+
+    img {
+        width: 15px;
+        height: 15px;
+        margin: 0.4vw !important;
+    }
+
+    span {
+        margin: 0.4vw !important;
+        flex: 1 0;     
+        text-align: center;           
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .logo {
+        margin-left: calc(50vw - #{$logo-width} - 10px);
+    }
+
+    .title {
+        margin-top: 20px !important;
+    }
+
+    .statistics {
+        margin-right: calc(50vw - #{$pointCard-width}* 2 - 10px - 10px) !important;
+        transform: scale(0.8);
+    }
+}

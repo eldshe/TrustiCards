@@ -1,0 +1,117 @@
+<!-- logo and points -->
+<div>
+    <img src='../../assets/logo.png' class="logo" />
+</div>
+<div class="statistics">
+    <div>
+        <div class="pointCard wins">
+            <span>
+                {{GD.points.wins}}
+            </span>
+        </div>
+        <div class="pointCard loses">
+            <span>
+                {{GD.points.loses}}
+            </span>
+
+        </div>
+    </div>
+    <div class="points">
+        <img class="coinImg" src="../../assets/coin.png">
+        <span>{{currencyPipe.transform(GD.points.points,'GBP','symbol','1.0-0')}}</span>
+    </div>
+</div>
+
+
+<!-- board -->
+<div class="column-row-centered column-between h100">
+    <div>
+        <h1 [ngClass]="{'title':true,'lowered':GD.status>0}">
+            {{GD.status!==0? title :"Catch the queen and get the BONUS"}}
+        </h1>
+    </div>
+    <div>
+        <button #startBtn (mouseenter)="hoverSound()" (click)="start()"
+            [ngClass]="{'start-btn':true,'hide':GD.status>0}">
+            {{'start' | uppercase }}
+        </button>
+    </div>
+    <div #cards [ngClass]="{'cards-wrapper':true,'clickable':GD.status==3,'chosen':GD.status>=3}">
+        <!-- 5 -->
+        <div class="left" (mouseenter)="GD.status==3&&sounds.cardHovr()">
+            <div (click)="GD.status==3 && end($event.target)"
+                [ngClass]="{'flip-card':true,'enlarge':oneOrTwo()||(GD.status>=4&&chosen==5),'fliped':GD.status>0&&GD.status<=4&&chosen!=5}">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <section *ngIf="!isHidden()" id="card5" class="card card--club" value="5">
+                            <div class="card__inner">
+                                <div class="card__column">
+                                    <div class="card__symbol"></div>
+                                    <div class="card__symbol"></div>
+                                </div>
+                                <div class="card__column card__column--centered">
+                                    <div class="card__symbol"></div>
+                                </div>
+                                <div class="card__column">
+                                    <div class="card__symbol"></div>
+                                    <div class="card__symbol"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="flip-card-back">
+                        <img src="../../assets/cardBack.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- queen -->
+        <div class="middle" (mouseenter)="GD.status==3&&sounds.cardHovr()">
+            <div (click)="GD.status==3 && end($event.target)"
+                [ngClass]="{'flip-card':true,'fliped':GD.status>0&&GD.status<=4&&!GD.correct,'enlarge':oneOrTwo()||(GD.status>=4&&GD.correct)}">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <section *ngIf="!isHidden()" id="queen" class="card card--heart" value="Q">
+                            <div class="card__inner card__inner--centered">
+                                <div class="card__column">
+                                    <img src='../../assets/crown.png' />
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="flip-card-back">
+                        <img src="../../assets/cardBack.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 3 -->
+        <div class="right" (mouseenter)="GD.status==3&&sounds.cardHovr()">
+            <div (click)="GD.status==3 && end($event.target)"
+                [ngClass]="{'flip-card':true,'fliped':GD.status>0&&GD.status<=4&&chosen!=3,'enlarge':oneOrTwo()||(GD.status>=4&&chosen==3)}">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <section *ngIf="!isHidden()" id="card3" class="card card--spade" value="3">
+                            <div class="card__inner card__inner--centered">
+                                <div class="card__column">
+                                    <div class="card__symbol"></div>
+                                    <div class="card__symbol"></div>
+                                    <div class="card__symbol"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="flip-card-back">
+                        <img src="../../assets/cardBack.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- shade overlay -->
+    <div #shader (click)="GD.status==5" [ngClass]="{'shader column-center':true,'show':oneOrTwo()}">
+    </div>
