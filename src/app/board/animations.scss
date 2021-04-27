@@ -1,0 +1,76 @@
+
+
+.reveal {
+    animation: flipMeBack 0.2s forwards;
+}
+
+.bounce {
+    animation: bounce 0.6s;
+    animation-delay: 0.5s;
+}
+
+
+@keyframes bounce {
+    0% {
+        transform: scale(1.10);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+    100% {
+        transform: scale(1.10);
+    }
+}
+
+.shuffleRight {
+    animation: shuffleRight 0.3s;
+}
+.shuffleLeft {
+    animation: shuffleLeft 0.3s;
+}
+
+@keyframes shuffleRight {
+    0% {
+        transform: scale(1);
+        z-index: 299;
+    }
+    50% {
+        transform: scale(0.8);
+    }
+    100% {
+        z-index: 301;
+        transform: scale(1);
+    }
+}
+
+@keyframes shuffleLeft {
+    0% {
+        transform: scale(1);
+        z-index: 301;
+    }
+    50% {
+        transform: scale(1.15);
+    }
+    100% {
+        z-index: 300;
+        transform: scale(1);
+    }
+}
+
+@keyframes flipMe {
+    0% {
+        transform: rotateY(0);
+    }
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+@keyframes flipMeBack {
+    0% {
+        transform: rotateY(180deg);
+    }
+    100% {
+        transform: rotateY(0);
+    }
+}
