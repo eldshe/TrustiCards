@@ -18,7 +18,7 @@ export class PopupComponent implements OnInit {
   ) {
 
     // Inner pipe for currency:
-    this.currencyPipeStr = currencyPipe.transform(65, 'GBP');
+    this.currencyPipeStr = currencyPipe.transform(65, 'GBP','symbol','1.0-0');
   }
 
   ngOnInit(): void {
